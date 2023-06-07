@@ -28,14 +28,34 @@ docker run --name postgres12 -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASS
 docker ps
 ```
 ```sh
+  docker exec -it postgres12 createdb --username=root --owner=root udemy
+```
+```sh
 docker exec -it <container_name_or_id> <command> [args]
 docker exec -it postgres12 psql -U root
 ```
 ```sh
 select now();
 \q
+CREATE SCHEMA IF NOT EXISTS "simple_bank";
 ```
 ```sh
 docker logs <container_name_or_id>
 docker logs postgres12
+```
+
+## PostgreSQL Migrate Golang
+source : 
+- https://github.com/golang-migrate/migrate
+- https://scoop.sh/
+
+```sh
+scoop install migarte
+scoop -v
+```
+```sh
+migrate create -ext sql -dir db/migration -seq init_schema
+```
+```sh
+migrate -path db/migration -database "postgresql://root:secret@localhost:5432/udemy?search_path=simple_bank&sslmode=disable" -verbose up
 ```
