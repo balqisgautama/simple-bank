@@ -49,13 +49,18 @@ source :
 - https://github.com/golang-migrate/migrate
 - https://scoop.sh/
 
+Installing migrate
 ```sh
-scoop install migarte
+scoop install migrate
 scoop -v
+```
+or
+```sh
+brew install golang-migrate
 ```
 ```sh
 migrate create -ext sql -dir db/migration -seq init_schema
 ```
 ```sh
-migrate -path db/migration -database "postgresql://root:secret@localhost:5432/udemy?search_path=simple_bank&sslmode=disable" -verbose up
+migrate -path db/migration -database "postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable" -verbose up
 ```
